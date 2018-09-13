@@ -1,0 +1,9 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load tags %}
+{% common_data as common_data %}
+{% block main %}
+    <div><img src="{% static '/img/banner.png' %}"></div>
+   {% include 'device_choose.html' %}
+{% endblock %}

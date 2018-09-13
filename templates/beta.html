@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load tags %}
+{% common_data as common_data %}
+
+{% block crumbs %}
+    <span>描述文件下载</span>
+{% endblock %}
+{% block main %}
+    <div class="box">
+        <div class="container beta">
+            <div>
+                <h2 class="title">Beta版指南</h2>
+                <div class="hero-subhead">
+                    请使用内置的Safari浏览器打开本页，点击安装描述文件，安装完成重启后进入设置-&gt;通用-&gt;软件更新，即可体验最新版的iOS系统。
+                </div>
+            </div>
+            <div class="beta-tab">
+                <div class="block">iOS</div>
+            </div>
+        </div>
+        <div class="row">
+            {% for item in profiles %}
+                <div class="card-list col-md-6">
+                    <div class="card-box card{{ forloop.counter  }}">
+                        <a href="{{ item.file.url }}" download="{{ item.file.url }}">
+                            <h2>{{ item.name }}</h2>
+                            <div>{{ item.update_date|date:'Y-m-d' }}</div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

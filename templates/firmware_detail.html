@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}{{ firmware.device.name }}
+    {{ firmware.version }}{% if firmware.build_id %}({{ firmware.build_id }}){% endif %}固件详情-奇客网{% endblock %}
+{% if firmware %}
+    {% block crumbs %}
+        <a href="{% url 'device_detail' firmware.device.type %}">{{ firmware.device.type }}</a>
+        <a href="{% url 'firmware' device %}">{{ firmware.device.name }}</a>
+        <span>{{ firmware.version }}{% if firmware.build_id %}({{ firmware.build_id }}){% endif %}</span>
+    {% endblock %}
+{% endif %}
+{% block main %}
+
+    <div class="box firmware-detail">
+        <div class="title">固件详情</div>
+        <div class="body">
+            <div>设备: {{ firmware.device.name }}</div>
+            <div>标识符: {{ firmware.identifier }}</div>
+            <div>版本: {{ firmware.version }}</div>
+            {% if firmware.device.type != 'iTunes' %}
+                <div>Build ID: {{ firmware.build_id }}</div>
+            {% endif %}
+            <div>上传时间: {{ firmware.upload_date|date:'Y-m-d H:i:s' }}</div>
+            <div>发布时间: {{ firmware.release_date|date:'Y-m-d H:i:s' }}</div>
+            {% if firmware.device.type != 'iTunes' %}
+                <div>文件大小: {{ firmware.file_size }}</div>
+                <div>MD5sum: {{ firmware.md5_sum }}</div>
+                <div>SHA1sum: {{ firmware.sha1_sum }}</div>
+
+                {% if firmware.signed %}
+                    <div class="enabled">
+                        <i class="fas fa-check"></i>该固件验证通道开放中，可以通过 iTunes 进行「升级」或「恢复」。
+                    </div>
+                {% else %}
+                    <div class="disable">
+                        <i class="fas fa-times"></i>该固件验证通道已经关闭，无法进行「升级」或「恢复」。
+                    </div>
+                {% endif %}
+            {% endif %}
+            <div>
+                <a href="{{ firmware.url }}" download="{{ firmware.url }}" class="tag">下载</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

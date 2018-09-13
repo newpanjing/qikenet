@@ -1,0 +1,56 @@
+{% load static %}
+<div class="box">
+    <div class="title">
+        <span>查找手机</span>
+        <a style="font-size: 15px;float: right" href="https://support.apple.com/zh-cn/HT201296" target="_blank">如何识别我的设备型号？</a>
+    </div>
+    <form target="_blank" method="get" action="{% url 'device_query' %}">
+        <input name="model" type="text" class="form-control" placeholder="输入您的型号以查找您的固件，例如：A1864"/>
+    </form>
+    {% if error %}
+        <div class="disable">没有找到"{{ request.GET.model }}"相关的固件，请确认您的型号是否正确。</div>
+    {% endif %}
+</div>
+<div class="box">
+    <div class="title">固件下载</div>
+    <div class="body">
+        <div class="row devices">
+            <div class="item col-md-4">
+                <a href="{% url 'device_detail' 'iPhone' %}">
+                    <img src="{% static 'img/iPhone.png' %}"/>
+                    <div>iPhone</div>
+                </a>
+            </div>
+            <div class="item col-md-4">
+                <a href="{% url 'device_detail' 'iPad' %}">
+                    <img src="{% static 'img/iPad.png' %}"/>
+                    <div>iPad</div>
+                </a>
+            </div>
+            <div class="item col-md-4">
+                <a href="{% url 'device_detail' 'iPod' %}">
+                    <img src="{% static 'img/iPod.png' %}"/>
+                    <div>iPod</div>
+                </a>
+            </div>
+            <div class="item col-md-4">
+                <a href="{% url 'device_detail' 'AppleWatch' %}">
+                    <img src="{% static 'img/Watch.png' %}"/>
+                    <div>Apple Watch</div>
+                </a>
+            </div>
+            <div class="item col-md-4">
+                <a href="{% url 'device_detail' 'AppleTV' %}">
+                    <img src="{% static 'img/AppleTV.png' %}"/>
+                    <div>Apple TV</div>
+                </a>
+            </div>
+            <div class="item col-md-4">
+                <a href="{% url 'device_detail' 'iTunes' %}">
+                    <img src="{% static 'img/iTunes.png' %}"/>
+                    <div>iTunes</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

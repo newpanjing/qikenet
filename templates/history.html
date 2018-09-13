@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load tags %}
+{% common_data as common_data %}
+{% block title %}苹果系统发布时间轴-奇客网{% endblock %}
+{% block crumbs %}
+    <span>发布历史</span>
+{% endblock %}
+{% block main %}
+    <div class="box">
+        <div class="history-tips">这是自2007年iPhone OS 1.0发布以来发布的发布时间表。</div>
+        <div class="timeline-block">
+            {% for item in releases %}
+                {% if forloop.counter|divisibleby:2 %}
+                    <div class="timeline timeline-right">
+                {% else %}
+                    <div class="timeline timeline-left">
+                {% endif %}
+            <div class="circles"></div>
+            <div class="line"></div>
+            {% if item.releases|length >= 5 %}
+                <div class="panel-header blue">{{ item.date }}</div>
+            {% elif  item.releases|length >= 3 %}
+                <div class="panel-header yellow">{{ item.date }}</div>
+            {% else %}
+                <div class="panel-header">{{ item.date }}</div>
+            {% endif %}
+            <div class="content">
+                {% for r in item.releases %}
+                    <div>
+                        <strong>{{ r.name }} </strong>
+                        <p>{{ r.date|utc_date|date:"H:m" }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ device.name }}固件列表-奇客网{% endblock %}
+
+{% block crumbs %}
+    {% if device %}
+        <a href="{% url 'device_detail' device.type %}">{{ device.type }}</a>
+        <span>{{ device.name }}</span>
+    {% endif %}
+{% endblock %}
+{% block main %}
+
+    <div class="box">
+        {% if firmwares %}
+            <div class="title">选择版本</div>
+            <div class="tag-tips">可用于升级或恢复</div>
+            <div class="row">
+                {% for f in firmwares %}
+                    {% if f.signed %}
+                        <div class="col-md-4">
+                            <a class="tag" href="{% url 'firmware_detail' id f.id %}">
+                                {{ f.version }}{% if f.build_id %}({{ f.build_id }}){% endif %}</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="tag-tips">不可用于升级或恢复</div>
+            <div class="row">
+                {% for f in firmwares %}
+                    {% if not f.signed %}
+                        <div class="col-md-4">
+                            <a class="tag stopped" href="{% url 'firmware_detail' id f.id %}">
+                                {{ f.version }}{% if f.build_id %}({{ f.build_id }}){% endif %}</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="tips">暂时没找到相关固件，您可以加入QQ群向我们报告这个问题。</div>
+        {% endif %}
+    </div>
+
+{% endblock %}

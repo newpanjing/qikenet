@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load tags %}
+{% common_data as common_data %}
+
+{% block title %}选择设备-奇客网{% endblock %}
+{% block crumbs %}
+    <span>选择设备</span>
+{% endblock %}
+{% block main %}
+    {% include 'device_choose.html' %}
+{% endblock %}

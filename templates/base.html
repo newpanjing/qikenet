@@ -1,0 +1,100 @@
+{% load static %}
+{% load tags %}
+{% common_data as common_data %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}奇客网-苹果设备固件下载{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="IE=edge,Chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta content="webkit" name="renderer"/>
+    <link rel="shortcut icon" href="{% url 'icon' %}" />
+    <link rel="bookmark"href="{% url 'icon' %}" />
+    <meta name="title" content="奇客网"/>
+    <meta name="description" content="奇客网提供iPhone、iWatch、iPad、iPod、AppleTV系统固件下载，以及测试版固件下载。"/>
+    <meta name="keywords" content="奇客网,Beta,Watch,iPhone,iOS,iPad,iPod"/>
+    {% block css %}
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    {% endblock %}
+</head>
+<body>
+
+<header class="clearfix">
+    <div class="container">
+        <ul class="nav">
+            <li class="nav-item title">🍪奇客网</li>
+            {% for m in common_data.menus %}
+             <li class="nav-item">
+                <a class="nav-link" href="{{ m.url }}">{{ m.name }}</a>
+             </li>
+            {% endfor %}
+        </ul>
+    </div>
+</header>
+<div class="container main-body">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="box">
+                <div class="crumbs">
+                    <a href="{% url 'home' %}"><i class="fas fa-home"></i>首页</a>
+                    {% block crumbs %}
+
+                    {% endblock %}
+                </div>
+            </div>
+            {% block main %}
+
+            {% endblock %}
+        </div>
+        <div class="col-md-4">
+            {% block right %}
+            <div class="box">
+                <div class="title">公告</div>
+                <div class="body">{{ common_data.notice|safe }}</div>
+            </div>
+            <div class="box">
+                <div class="title">贝塔博客</div>
+                <div class="body">
+                    <a href="https://www.88cto.com" target="_blank">
+                        <img src="{% static 'img/blog.jpg' %}"/>
+                    </a>
+                </div>
+            </div>
+            <div class="box">
+                <div class="title">QQ群</div>
+                <div class="body">
+                    <div>iOS11交流群：261357587</div>
+                    <div>iOS12交流群：255164796</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="title">友情链接</div>
+               <div class="body">
+                   {% for link in common_data.links %}
+                    <div><a href="{{ link.url }}" target="_blank">{{ link.name }}</a> </div>
+                   {% endfor %}
+               </div>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% block footer %}
+<div class="container">
+    <footer>
+        © 奇客网 2016 - 2018 · 闽ICP备14007050号-1 ·Designed by <a href="https://www.88cto.com" target="_blank">贝塔博客</a><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                document.write(unescape("%3Cspan id='cnzz_stat_icon_1269639674'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1269639674%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+    </footer>
+</div>
+{% endblock %}
+{% block js %}
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% endblock %}
+</body>
+</html>

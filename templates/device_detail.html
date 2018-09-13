@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load tags %}
+{% common_data as common_data %}
+{% block title %}{{ name }}列表-奇客网{% endblock %}
+{% block crumbs %}
+   <span href="{% url 'device_detail' name %}">{{ name }}</span>
+{% endblock %}
+{% block main %}
+    <div class="box">
+        <div class="title">选择您的设备</div>
+        <div class="row">
+        {% for d in devices %}
+            <div class="col-md-4">
+                <a class="tag" href="{% url 'firmware' d.device_no %}">{{ d.name }}</a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
