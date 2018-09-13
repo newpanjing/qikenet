@@ -32,7 +32,7 @@ class Firmware(models.Model):
     url = models.CharField(max_length=512, verbose_name='下载地址', null=True)
     release_date = models.DateTimeField(verbose_name='发布时间', null=True)
     upload_date = models.DateTimeField(verbose_name='上传时间', null=True)
-    signed = models.BooleanField(verbose_name='签名', null=True)
+    signed = models.NullBooleanField(verbose_name='签名', default=True, null=True)
     create_date = models.DateTimeField(verbose_name='创建时间', blank=True, null=True, auto_now_add=True)
     build_id = models.CharField(max_length=32, verbose_name='BuildId', null=True)
     md5_sum = models.CharField(max_length=32, verbose_name='md5sum', null=True)
@@ -49,7 +49,7 @@ class Firmware(models.Model):
 class Profile(models.Model):
     name = models.CharField(max_length=20, verbose_name='名称')
     file = models.FileField(verbose_name='描述文件')
-    sort=models.IntegerField(verbose_name='排序',default=0,help_text='升序，从小到大')
+    sort = models.IntegerField(verbose_name='排序', default=0, help_text='升序，从小到大')
     update_date = models.DateTimeField(verbose_name='更新时间', auto_now=True)
 
     class Meta:
