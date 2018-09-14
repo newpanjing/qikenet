@@ -317,3 +317,37 @@ footer {
 .tag-tips{
     margin: 10px auto;
 }
+
+@media (max-width:768px) {
+    .nav .nav-item a{
+        padding-right: 0px;
+        padding-left: 10px;
+    }
+    .timeline-block {
+        width: auto;
+    }
+
+    .timeline-left {
+        margin-left: 50%;
+    }
+
+    .timeline-right {
+        margin-right: 50%;
+    }
+
+    .timeline-left .line {
+        left: 0;
+    }
+
+    .timeline-right .line {
+        right: -2px;
+    }
+
+    .timeline-left .circles {
+        left: -7px;
+    }
+
+    .timeline-right .circles {
+        right: -9px;
+    }
+}
