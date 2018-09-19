@@ -15,7 +15,7 @@ class MyTestCase(unittest.TestCase):
     def setUp(self):
         print('开始')
 
-    def ___test_save_device(self):
+    def test_save_device(self):
         devices = api.get_devices()
 
         for item in devices:
@@ -47,11 +47,14 @@ class MyTestCase(unittest.TestCase):
             device.save()
             print(device)
 
-    def ___test_firmware(self):
+    def test_firmware(self):
         devices = Device.objects.all()
         for d in devices:
 
             firmware = api.get_firmware(d.device_no)
+            if firmware.get('firmwares') is None:
+                continue
+
             for f in firmware['firmwares']:
 
                 buildid = f['buildid']
@@ -59,6 +62,8 @@ class MyTestCase(unittest.TestCase):
 
                 if Firmware.objects.filter(build_id=buildid, identifier=identifier).exists():
                     print('identifier={} build_id={} 存在'.format(identifier, buildid))
+                    # 更新固件签名状态
+
                     continue
 
                 db = Firmware.objects.create(
