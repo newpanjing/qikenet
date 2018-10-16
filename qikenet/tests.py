@@ -36,7 +36,7 @@ class MyTestCase(unittest.TestCase):
                 type = 'AppleTV'
 
             if Device.objects.filter(name=name).exists():
-                print('数据存在')
+                # print('数据存在')
                 continue
 
             device = Device.objects.create(
@@ -52,7 +52,7 @@ class MyTestCase(unittest.TestCase):
         for d in devices:
 
             firmware = api.get_firmware(d.device_no)
-            if firmware.get('firmwares') is None:
+            if firmware is None or firmware.get('firmwares') is None:
                 continue
 
             for f in firmware['firmwares']:
@@ -61,7 +61,7 @@ class MyTestCase(unittest.TestCase):
                 identifier = f['identifier']
 
                 if Firmware.objects.filter(build_id=buildid, identifier=identifier).exists():
-                    print('identifier={} build_id={} 存在'.format(identifier, buildid))
+                    # print('identifier={} build_id={} 存在'.format(identifier, buildid))
                     # 更新固件签名状态
 
                     continue

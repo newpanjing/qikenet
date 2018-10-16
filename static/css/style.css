@@ -16,6 +16,9 @@ html, body {
     clear: both;
     visibility: hidden
 }
+.nav>li{
+    float: left;
+}
 
 img {
     max-width: 100%;
